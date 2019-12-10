@@ -2,7 +2,7 @@
 
 ## DODAS generated Spark cluster
 
-### Contact: diego.ciangottini<at>pg.infn.it
+### Contact: diego.ciangottini\<at\>pg.infn.it
 
 ---
 
@@ -20,7 +20,18 @@
 
 # Spark on DODAS
 
-![schema]()
+![schema](img/k8s-dodas.png)
+
+---
+
+# Setup architecture: recap
+
+- __Master pod__:
+    - __Spark driver__
+    - __Jupyter__
+
+- __Services__:
+    - ..
 
 ---
 
@@ -45,7 +56,7 @@
 
 ## Documentation
 
-## Download the binare
+## Download the binary
 
 ## Configuration
 
@@ -68,9 +79,25 @@
 
 ## What's Helm
 
+## Install Helm
+
 ## Simple example
 
-### Init your charts
+### Init your chart
+
+---
+
+# Helm: "chart up" your application
+
+## Application 1
+
+## Application 2
+
+## Test your Helm chart
+
+## Publish the chart
+
+Reference [documentation]()
 
 ---
 
