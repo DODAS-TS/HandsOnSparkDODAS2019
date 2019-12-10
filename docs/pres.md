@@ -1,6 +1,8 @@
-# Hand-on session on DODAS generated Spark cluster
+# Hand-on session
 
-## Contact: diego.ciangottini<at>pg.infn.it
+## DODAS generated Spark cluster
+
+### Contact: diego.ciangottini<at>pg.infn.it
 
 ---
 
@@ -22,7 +24,9 @@
 
 ---
 
-# Download the Hands-on repo
+# Setting up you environment
+
+## Download the Hands-on repo
 
     !bash
     wget https://github.com/DODAS-TS/HandsOnSparkDODAS2019.git
@@ -33,26 +37,66 @@
     !bash
     cp templates/....
 
----
-
-# Retrieve you access token from IAM
-
-
----
-
-# Download the Hands-on repo
-
+## Retrieve you access token from IAM
 
 ---
 
 # Install DODAS client
 
+## Documentation
+
+## Download the binare
+
 ## Configuration
 
+## Test the installation
 ---
 
 # Deploy your cluster
 
+## Get TOSCA template
+
+## Fill the configuration parameters
+
+## Deploy the cluster
+
+## Check the status
+
 ---
 
 # Helm: introduction exercise
+
+## What's Helm
+
+## Simple example
+
+### Init your charts
+
+---
+
+# Time to play with Spark cluster
+
+## Debugging
+
+### Kubernetes Web-UI
+
+### Spark Web-UI
+
+### Log into the k8s master
+
+--- 
+
+# Using Jupyter
+
+## Start a python notebook
+
+### Check the executor pods appearing 
+
+## Basic functional test
+
+### Calculate Pi
+
+    !python
+    def test:
+
+---
