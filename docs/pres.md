@@ -88,7 +88,7 @@
 
 # Using Jupyter
 
-## Start a python notebook
+## Load the exercise notebook
 
 ### Check the executor pods appearing 
 
@@ -98,5 +98,10 @@
 
     !python
     def test:
+
+---
+
+# Spark playground
+
 
 ---
