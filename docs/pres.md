@@ -26,7 +26,7 @@
 
 # Spark on DODAS
 
-<img src="img/k8s_spark_cut.png" scale=0.2>
+<img src="img/k8s_spark_cut.png" width=600>
 
 ---
 
