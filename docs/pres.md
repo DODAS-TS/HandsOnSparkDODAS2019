@@ -18,20 +18,33 @@
 
 ---
 
-# Spark on DODAS
+# K8s on DODAS
 
 ![schema](img/k8s-dodas.png)
 
 ---
 
+# Spark on DODAS
+
+![schema](img/k8s_spark_cut.png)
+
+---
+
 # Setup architecture: recap
 
-- __Master pod__:
+- __1 Master pod__:
     - __Spark driver__
     - __Jupyter__
 
 - __Services__:
-    - ..
+    - __Jupyter__
+    - __Spark webUI__
+    - __K8s dashboard__
+
+- __At notebook python Kernel start__:
+    - __2 executor pods__
+
+Also possible to step them and reload a spark context with different executors from the notebook directly.
 
 ---
 
@@ -49,6 +62,8 @@
     cp templates/....
 
 ## Retrieve you access token from IAM
+
+...
 
 ---
 
