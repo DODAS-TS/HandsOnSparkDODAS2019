@@ -1,28 +1,45 @@
-# Landslide
+# Hand-on session on DODAS generated Spark cluster
+
+Contact: diego.ciangottini<at>pg.infn.it
 
 ---
 
 # Overview
 
-Generate HTML5 slideshows from markdown, ReST, or textile.
-
-
-Landslide is primarily written in Python, but it's themes use:
-
-- HTML5
-- Javascript
-- CSS
+- Objective recap
+  - Deploy your own cluster
+- Templating applications with Helm
+  - Simple function example
+- User interfaces for Spark on Dodas
+  - Experimenting base features
+  - Debugging
 
 ---
 
-# Code Sample
+# Spark on DODAS
 
-Landslide supports code snippets
+![schema]()
 
-    !python
-    def log(self, message, level='notice'):
-        if self.logger and not callable(self.logger):
-            raise ValueError(u"Invalid logger set, must be a callable")
+---
 
-        if self.verbose and self.logger:
-            self.logger(message, level)
+# Retrieve you access token from IAM
+
+
+---
+
+# Download the Hands-on repo
+
+
+---
+
+# Install DODAS client
+
+## Configuration
+
+---
+
+# Deploy your cluster
+
+---
+
+# Helm: introduction exercise
