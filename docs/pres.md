@@ -20,7 +20,7 @@
 
 # K8s on DODAS
 
-![schema](img/k8s-dodas.png)
+<img src="img/k8s-dodas.png" width=400>
 
 ---
 
