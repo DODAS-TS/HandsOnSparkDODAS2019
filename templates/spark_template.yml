@@ -27,11 +27,11 @@ topology_template:
 
     num_cpus_slave: 
       type: integer
-      default: 4
+      default: 2
 
     mem_size_slave:
       type: string
-      default: "8 GB"
+      default: "4 GB"
 
     server_image_slave:
       type: string

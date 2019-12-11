@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: lookup-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      containers:
+      - name: lookup-container-deployment
+        image: dciangot/lookup 
+        ports:
+        - containerPort: 80
+        env:
+        - name: SIMPLE_SERVICE_VERSION
+          value: "1.0"
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "500m"
+      - name: probe-container
+        image: dciangot/probe

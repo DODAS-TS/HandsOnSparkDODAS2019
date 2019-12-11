@@ -48,18 +48,18 @@ Directly from the notebook is also possible to stop the current spark context an
 
 ---
 
-# Setting up you environment
+# Setting up your environment
 
 ## Download the Hands-on repo
 
     !bash
-    wget https://github.com/DODAS-TS/HandsOnSparkDODAS2019.git
+    git clone https://github.com/DODAS-TS/HandsOnSparkDODAS2019.git
     cd HandsOnSparkDODAS2019
 
 ## Copy your DODAS configuration template
 
     !bash
-    cp templates/dodas_template.yaml ~/.dodas.yaml
+    cp templates/dodas_template.yaml ~/.dodas_template.yaml
 
 ### Quick look at DODAS client configuration
 
@@ -80,6 +80,8 @@ Directly from the notebook is also possible to stop the current spark context an
         host: https://im-demo.cloud.cnaf.infn.it/infrastructures
         token: token_template 
 
+---
+
 ## Retrieve you access token from IAM
 
 ### Import the pre-configured client for the demo
@@ -98,6 +100,9 @@ Simply run and follow the instructions:
 
 ### Check $HOME/.dodas.yaml file correctly filled
 
+    !bash
+    cat ~/.dodas.yaml
+
 ---
 
 # Install DODAS client
@@ -114,6 +119,8 @@ You can find a quick start guide and reference guide [here](https://cloud-pg.git
 
 ## Test the installation
 
+    !bash
+    ./dodas --version
 
 
 ---
@@ -125,37 +132,215 @@ You can find a quick start guide and reference guide [here](https://cloud-pg.git
     !bash
     less templates/spark_template.yml
 
-## Understand the configuration parameters
+## Understand the configuration 
+
+### Defining the TOSCA type resources
+
+    !yaml
+    tosca_definitions_version: tosca_simple_yaml_1_0
+
+    imports:
+        - indigo_custom_types: https://raw.githubusercontent.com/indigo-dc/tosca-types/k8s-course/custom_types.yaml 
+
+    description: TOSCA template for a complete CMS computing cluster on top of K8s orchestrator
+
+
+---
 
 ## Deploy the cluster
 
-## Check the status
+### Validation
+
+You can check for an error in your templates with `dodas validate command`
+
+    !bash
+    dodas validate --template templates/spark_template.yml
+
+### Launch the deployment
+
+    !bash
+    $ ./dodas create templates/spark_template.yml 
+        Using config file: /home/centos/.dodas.yaml
+        validate called
+        Template OK
+        Template: templates/spark_template.yml 
+        Submitting request to  :  https://im-demo.cloud.cnaf.infn.it/infrastructures
+        InfrastructureID:  c8a7a544-1bee-11ea-a67e-0242ac160003
+
+### Check the status of the vm configuration
+
+Checking the status of configuration on master node:
+
+$ ./dodas get status vm c8a7a544-1bee-11ea-a67e-0242ac160003 0
+
 
 ---
 
 # Helm: introduction exercise
 
+While the deployment goes, let's setup a local playgroud to understand how the K8s templating works with HELM
+
 ## What's Helm
 
-## Install Helm
+[Helm](https://helm.sh/) helps managing Kubernetes applications through a standard templating.
+The latest version of Helm is maintained by the CNCF - in collaboration with Microsoft, Google, Bitnami and the Helm contributor community. For this hands on we will use the v2 though, since DODAS is currently in the midle of the migration from v2 to v3. 
 
+![Helm motivation](img/helm_love.png)
+
+On [HelmHub](https://hub.helm.sh/) you can find by yourselves the motivation of adopting a widely adopted template format.
+
+Helm uses a packaging format called charts. A chart is a collection of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
+
+---
+# Install Helm and local k8s
+
+Let's setup our local cluster with 2 fake nodes:
+
+    !bash
+    # Install k8s cli
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+    chmod +x kubectl 
+
+    # Install k8s in docker
+    curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.6.1/kind-$(uname)-amd64
+    chmod +x ./kind
+
+    # deploy the playground
+    ./kind create cluster --config templates/kind_cluster_config.yml
+
+    # install helm client
+    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+
+Check that everything is working with:
+
+    !bash
+    $ ./kubectl get node
+        NAME                 STATUS   ROLES    AGE     VERSION
+        kind-control-plane   Ready    master   3m55s   v1.16.3
+        kind-worker          Ready    <none>   2m36s   v1.16.3
+        kind-worker2         Ready    <none>   2m36s   v1.16.3
+
+
+---
 ## Simple example
 
 ### Init your chart
+
+    !bash
+    # Create a defualt chart
+    helm create myfirstchart
+
+    # Remove standard templates
+    rm -rf mychart/templates/*.*
+
+### Chart folder tree
+
+Charts are created as files laid out in a particular directory tree, then they can be packaged into versioned archives to be deployed.
+
+
+    !text
+    myfirstchart/
+        Chart.yaml          # A YAML file containing information about the chart
+        LICENSE             # OPTIONAL: A plain text file containing the license for the chart
+        README.md           # OPTIONAL: A human-readable README file
+        values.yaml         # The default configuration values for this chart
+        templates/          # A directory of templates that, when combined with values,
+                            # will generate valid Kubernetes manifest files.
+        templates/NOTES.txt # OPTIONAL: A plain text file containing short usage notes
 
 ---
 
 # Helm: "chart up" your application
 
-## Application 1
+## Deployment template
 
-## Application 2
+    !yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+        name: lookup-deployment
+    spec:
+        replicas: 1
+        template:
+            metadata:
+                labels:
+                    app: {{ .Values.appName }}
+            spec:
+                containers:
+                - name: lookup-container-deployment
+                    image: dciangot/lookup 
+                    ports:
+                    - containerPort: 80
+                    env:
+                    - name: SIMPLE_SERVICE_VERSION
+                    value: "1.0"
+                    resources:
+                        limits:
+                            memory: "64Mi"
+                            cpu: "500m"
+                - name: probe-container
+                  image: dciangot/probe
 
-## Test your Helm chart
+        selector:
+            matchLabels:
+                app: {{ .Values.appName }}
+
+---
+## Service template
+
+    !yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+        name: simpleservice
+    spec:
+        ports:
+            - port: {{ .Values.servicePort }}
+              targetPort: 80
+        selector:
+            app: {{ .Values.appName }}
+
+## Value file
+
+In `values.yaml` we can now put our deployment variables:
+
+    !yaml
+    servicePort: 30080
+    appName: 
+
+---
+
+## Install your Helm chart on the cluster
+
+    !bash
+    $ helm install mychart ./myfirstchart
+        NAME: mychart
+        LAST DEPLOYED: Wed Dec 11 09:02:50 2019
+        NAMESPACE: default
+        STATUS: deployed
+        REVISION: 1
+        TEST SUITE: None
+
+
+One can also verified the manifest that has been actually submitted to k8s with:
+
+    !bash
+    helm get manifest mychart
+
+You should see that the parameters in the templates should be filled with the values we passed on values.yaml file.
+
+---
+
+## Verify the deployments
+
+$ ./kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+lookup-deployment-64dd5568bc-6dft5   2/2     Running   0          49s
 
 ## Publish the chart
 
-Reference [documentation]()
+Charts can then be exposed for external reuse creating repositories with various methods described [here](https://helm.sh/docs/howto/chart_repository_sync_example/)
 
 ---
 
@@ -163,7 +348,7 @@ Reference [documentation]()
 
 ## Values 
 
-As you can see following the link in the TOSCA template. The values needed for the deployment are:
+As you can see following the link we put on `helm_values` field in the TOSCA template. The values needed for the spark deployment are these:
 
     !yaml
     Spark:
@@ -190,34 +375,72 @@ As you can see following the link in the TOSCA template. The values needed for t
         NodePort: 30888
 
 ---
-# Time to play with Spark cluster
+# Time to play with DODAS Spark cluster
 
-## Debugging
+### Retrieve again the token
+
+### Check the status of the deployment
+
+By now you should see something like:
+
+    !bash
+    $ /usr/local/bin/dodas get status vm c8a7a544-1bee-11ea-a67e-0242ac160003 0
+        ...
+        ...
+        TASK [cloud-pg.ansible_role_helm : Helm install chart cloudpg/spark] ***********
+        Wednesday 11 December 2019  08:35:44.102069 
+        changed: [131.154.96.135_0]
+
+        PLAY RECAP *********************************************************************
+        131.154.96.135_0           : ok=4    changed=4    unreachable=0    failed=0   
+        131.154.96.135_0           : ok=4    changed=4    unreachable=0    failed=0   
+
+        Task helm_spark_conf_k8s_master_server finished successfully
+        Process finished
+
 
 ### Kubernetes Web-UI
 
+The UI should be now exposed on the port 30443 of you master node e.g. `https://<your master IP>:30443`
+
 ### Spark Web-UI
 
+The UI should be now exposed on the port 30443 of you master node e.g. `https://<your master IP>:30808`
+
 ### Log into the k8s master
+
+You are also able to log into the master retrieving access information with the dodas client:
+
+    !bash
+    ./dodas get vm c8a7a544-1bee-11ea-a67e-0242ac160003 0
+
+Just save the prompted private key and login with `cloudadm` user
 
 --- 
 
 # Using Jupyter
 
+Jupyter is accessible at `http://<your master IP>:30888` with the password `testme`
+
 ## Load the exercise notebook
+
+You should be able now to import the exercise notebook in `templates/spark_notebook.ipynb` with the upload button and to start its kernel.
 
 ### Check the executor pods appearing 
 
-## Basic functional test
+In the k8s web ui you should see now 2 additional pods appearing as the spark shell have been started by the kernel automatically creating  a pool of executor.
 
-### Calculate Pi
-
-    !python
-    def test:
+The number and size of executors can be tuned both at TOSCA level and directly from Jupyter as you can find the in the example playbook provided.
 
 ---
 
-# Spark playground
-
+# Time for Spark playground and questions
 
 ---
+
+# Destroy the cluster
+
+Just retrieve the token again and then do:
+
+    !bash
+    ./dodas destroy  c8a7a544-1bee-11ea-a67e-0242ac160003 
