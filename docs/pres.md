@@ -134,7 +134,7 @@ You can find a quick start guide and reference guide [here](https://cloud-pg.git
 ## Download the binary
 
     !bash
-    wget https://github.com/Cloud-PG/dodas-go-client/releases/download/v0.3.0-rc2/dodas.zip
+    wget https://github.com/Cloud-PG/dodas-go-client/releases/download/v0.3.0/dodas.zip
     unzip dodas.zip
 
 ## Test the installation
@@ -422,6 +422,8 @@ By now you should see something like:
 
         Task helm_spark_conf_k8s_master_server finished successfully
         Process finished
+
+If not, don't worry, we got a backup solution at `131.154.96.211:30888`
 
 ---
 
