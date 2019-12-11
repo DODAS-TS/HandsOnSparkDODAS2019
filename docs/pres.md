@@ -38,7 +38,7 @@ Markdown version of this presentation can be found [here](https://github.com/DOD
 
 # K8s on DODAS
 
-<img src="img/k8s-dodas.png" width=600>
+<img src="img/k8s-dodas.png" width=400>
 
 ---
 
