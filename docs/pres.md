@@ -44,9 +44,13 @@ Markdown version of this presentation can be found [here](https://github.com/DOD
 
 # Spark on DODAS
 
+## Client mode with Jupyter notebook
+
 <img src="img/k8s_spark_cut.png" width=800>
 
 You see here Helm as a tool for templating applications on K8s. We will take a look at this later after we start the deployment (sorry time reason)
+
+At the end we wiil also see an example of job submission in __cluster mode__
 
 ---
 
