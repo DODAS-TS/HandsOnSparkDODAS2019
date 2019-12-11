@@ -409,8 +409,13 @@ Charts can then be exposed for external reuse creating repositories with various
     Jupyter:
         NodePort: 30888
 
+---
+
+# More details
+
 Find the whole chart tree in `templates/helm/spark`
 And the spark image for Kubernetes resource manager [here](https://github.com/apache/spark/tree/master/resource-managers/kubernetes)
+
 ---
 
 # Question time 4.
@@ -439,7 +444,7 @@ By now you should see something like:
         Task helm_spark_conf_k8s_master_server finished successfully
         Process finished
 
-If not, don't worry, we got a backup solution at `131.154.96.217:30888`
+If not, don't worry, we got a backup solution at `131.154.96.222:30888`
 
 ---
 
