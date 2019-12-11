@@ -8,8 +8,8 @@
 Markdown version of this presentation can be found [here](https://github.com/DODAS-TS/HandsOnSparkDODAS2019/blob/master/docs/pres.md)
 
 
-#### Big Data Analytics
-9-12 Dic. 2019, Bologna
+# Big Data Analytics
+## 9-12 Dic. 2019, Bologna
 
 ---
 
@@ -161,8 +161,6 @@ You can find a quick start guide and reference guide [here](https://cloud-pg.git
 
     imports:
         - indigo_custom_types: https://raw.githubusercontent.com/indigo-dc/tosca-types/k8s-course/custom_types.yaml 
-
-    description: TOSCA template for a complete CMS computing cluster on top of K8s orchestrator
 
 ### Time for discussion and detailed walk through
 
@@ -373,9 +371,7 @@ Charts can then be exposed for external reuse creating repositories with various
 
 # Spark HELM chart
 
-## Values 
-
-As you can see following the link we put on `helm_values` field in the TOSCA template. The values needed for the spark deployment are these:
+## A look at need values 
 
     !yaml
     Spark:
@@ -425,16 +421,17 @@ By now you should see something like:
         Task helm_spark_conf_k8s_master_server finished successfully
         Process finished
 
+---
 
-### Kubernetes Web-UI
+## Kubernetes Web-UI
 
 The UI should be now exposed on the port 30443 of you master node e.g. `https://<your master IP>:30443`
 
-### Spark Web-UI
+## Spark Web-UI
 
 The UI should be now exposed on the port 30443 of you master node e.g. `https://<your master IP>:30808`
 
-### Log into the k8s master
+## Log into the k8s master
 
 You are also able to log into the master retrieving access information with the dodas client:
 
@@ -442,6 +439,8 @@ You are also able to log into the master retrieving access information with the 
     ./dodas get vm c8a7a544-1bee-11ea-a67e-0242ac160003 0
 
 Just save the prompted private key and login with `cloudadm` user
+
+## Time for discussion and a bit of playground
 
 --- 
 
