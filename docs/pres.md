@@ -205,7 +205,7 @@ While the deployment goes, let's setup a local playgroud to understand how the K
 ## What's Helm
 
 [Helm](https://helm.sh/) helps managing Kubernetes applications through a standard templating.
-The latest version of Helm is maintained by the CNCF - in collaboration with Microsoft, Google, Bitnami and the Helm contributor community. For this hands on we will use the v2 though, since DODAS is currently in the midle of the migration from v2 to v3. 
+The latest version of Helm is maintained by the CNCF - in collaboration with Microsoft, Google, Bitnami and the Helm contributor community. For this hands on we will use the v2 though, since DODAS is currently in the middle of the migration from v2 to v3. 
 
 ![Helm motivation](img/helm_love.png)
 
