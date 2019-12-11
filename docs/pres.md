@@ -4,6 +4,9 @@
 
 ### Contact: diego.ciangottini<at\>pg.infn.it
 
+
+Markdown version of this presentation can be found [here](https://github.com/DODAS-TS/HandsOnSparkDODAS2019/blob/master/docs/pres.md)
+
 ---
 
 # Overview
@@ -144,6 +147,7 @@ You can find a quick start guide and reference guide [here](https://cloud-pg.git
 
     description: TOSCA template for a complete CMS computing cluster on top of K8s orchestrator
 
+### Time for discussion and detailed walk through
 
 ---
 
@@ -186,6 +190,8 @@ While the deployment goes, let's setup a local playgroud to understand how the K
 The latest version of Helm is maintained by the CNCF - in collaboration with Microsoft, Google, Bitnami and the Helm contributor community. For this hands on we will use the v2 though, since DODAS is currently in the midle of the migration from v2 to v3. 
 
 ![Helm motivation](img/helm_love.png)
+
+---
 
 On [HelmHub](https://hub.helm.sh/) you can find by yourselves the motivation of adopting a widely adopted template format.
 
