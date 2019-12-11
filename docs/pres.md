@@ -7,6 +7,21 @@
 
 Markdown version of this presentation can be found [here](https://github.com/DODAS-TS/HandsOnSparkDODAS2019/blob/master/docs/pres.md)
 
+
+#### Big Data Analytics
+9-12 Dic. 2019, Bologna
+
+---
+
+# Presentation keyboard shortcut
+
+- Press `h` to toggle display of help
+- Press `left arrow` and `right arrow` to navigate
+- Press `t` to toggle a table of contents for your presentation. Slide titles are links
+- Press `ESC` to display the presentation overview (Exposé)
+- Press `n` to toggle slide number visibility
+- Press `e` to make slides filling the whole available space within the document body
+
 ---
 
 # Overview
@@ -64,7 +79,9 @@ Directly from the notebook is also possible to stop the current spark context an
     !bash
     cp templates/dodas_template.yaml ~/.dodas_template.yaml
 
-### Quick look at DODAS client configuration
+---
+
+# Quick look at DODAS client configuration
 
     !yaml
     cloud:
@@ -149,6 +166,8 @@ You can find a quick start guide and reference guide [here](https://cloud-pg.git
 
 ### Time for discussion and detailed walk through
 
+Now let's take a look at the rest our template.
+
 ---
 
 ## Deploy the cluster
@@ -175,7 +194,8 @@ You can check for an error in your templates with `dodas validate command`
 
 Checking the status of configuration on master node:
 
-$ ./dodas get status vm c8a7a544-1bee-11ea-a67e-0242ac160003 0
+    !bash
+    $ ./dodas get status vm c8a7a544-1bee-11ea-a67e-0242ac160003 0
 
 
 ---
@@ -340,9 +360,10 @@ You should see that the parameters in the templates should be filled with the va
 
 ## Verify the deployments
 
-$ ./kubectl get pod
-NAME                                 READY   STATUS    RESTARTS   AGE
-lookup-deployment-64dd5568bc-6dft5   2/2     Running   0          49s
+    !bash
+    $ ./kubectl get pod
+        NAME                                 READY   STATUS    RESTARTS   AGE
+        lookup-deployment-64dd5568bc-6dft5   2/2     Running   0          49s
 
 ## Publish the chart
 
