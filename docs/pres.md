@@ -27,18 +27,18 @@ Markdown version of this presentation can be found [here](https://github.com/DOD
 # Overview
 
 - Objective recap
-    - Deploy your own cluster
-- Templating applications with Helm
-    - Simple function example
-- User interfaces for Spark on Dodas
-    - Experimenting base features
-    - Debugging
+    - Deploy your own Spark cluster with Dodas
+    - How to template applications with Helm
+        - Simple function example
+    - Get to know user interfaces for Spark on Dodas
+        - Experimenting base features
+        - Debugging
 
 ---
 
 # K8s on DODAS
 
-<img src="img/k8s-dodas.png" width=400>
+<img src="img/k8s-dodas.png" width=500>
 
 ---
 
@@ -396,6 +396,8 @@ Charts can then be exposed for external reuse creating repositories with various
         ServiceType: ClusterIP
     Jupyter:
         NodePort: 30888
+
+Find the whole chart tree in `templates/helm/spark`
 
 ---
 # Time to play with DODAS Spark cluster

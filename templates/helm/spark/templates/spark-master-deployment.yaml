@@ -1,0 +1,140 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: default-pyspark
+  namespace: default
+subjects:
+- kind: User
+  name: system:serviceaccount:default:default
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: edit
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "master-fullname" . }}
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    component: "{{ .Release.Name }}-{{ .Values.Master.Component }}"
+spec:
+  type: NodePort
+  ports:
+    # TODO: manage service type from config
+    - port: {{ .Values.Master.ServicePort }}
+      name: master
+      targetPort: {{ .Values.Master.ContainerPort }}
+    - port: 8888 
+      nodePort: {{ .Values.Master.Jupyter.NodePort }}
+      name: jupyter
+      targetPort: 8888
+  externalIPs:
+    - "{{ .Values.externalIP.ip }}"
+
+  selector:
+    component: "{{ .Release.Name }}-{{ .Values.Master.Component }}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "webui-fullname" . }}
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    component: "{{ .Release.Name }}-{{ .Values.Master.Component }}"
+spec:
+  # TODO: manage service type from config
+  type: NodePort
+  #  type: {{ .Values.Master.ServiceType }}
+  ports:
+    - port: {{ .Values.WebUi.ServicePort }}
+      nodePort: {{ .Values.WebUi.NodePort }}
+      targetPort: {{ .Values.WebUi.ContainerPort }}
+  externalIPs:
+    - "{{ .Values.externalIP.ip }}"
+
+  selector:
+    component: "{{ .Release.Name }}-{{ .Values.Master.Component }}"
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "master-fullname" . }}
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    component: "{{ .Release.Name }}-{{ .Values.Master.Component }}"
+    app: spark-master
+spec:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - spark-master
+      topologyKey: kubernetes.io/hostname
+  replicas: {{ default 1 .Values.Master.Replicas }}
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      component: "{{ .Release.Name }}-{{ .Values.Master.Component }}"
+  template:
+    metadata:
+      labels:
+        heritage: {{ .Release.Service | quote }}
+        release: {{ .Release.Name | quote }}
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        component: "{{ .Release.Name }}-{{ .Values.Master.Component }}"
+    spec:
+      containers:
+        - name: {{ template "master-fullname" . }}
+          image: "{{ .Values.Master.Image }}:{{ .Values.Master.ImageTag }}"
+          args: ["master"]
+          ports:
+            - containerPort: {{ .Values.Master.ContainerPort }}
+            - containerPort: {{ .Values.WebUi.ContainerPort }}
+          resources:
+            requests:
+              cpu: "{{ .Values.Master.Cpu }}"
+              memory: "{{ .Values.Master.Memory }}"
+          env:
+          - name: SPARK_DAEMON_MEMORY
+            value: {{ default "1g" .Values.Master.DaemonMemory | quote }}
+          - name: SPARK_MASTER_HOST
+            value: {{ template "master-fullname" . }}
+          - name: SPARK_MASTER_PORT
+            value: {{ .Values.Master.ServicePort | quote }}
+          - name: SPARK_MASTER_WEBUI_PORT
+            value: {{ .Values.WebUi.ContainerPort | quote }}
+        - name: jupyter
+          imagePullPolicy: Always
+          command: ["start.sh"]
+          args: ["/usr/local/spark/bin/pyspark"]
+          env:
+            - name: PYSPARK_PYTHON
+              value: python3
+            - name: PYSPARK_DRIVER_PYTHON
+              value: ipython
+            - name: PYSPARK_DRIVER_PYTHON_OPTS
+              value: "notebook --NotebookApp.token='testme'"
+          image: "cloudpg/spark-notebook:k8s-py3.6" 
+          ports:
+          - containerPort: 8888
+          volumeMounts:
+          - mountPath: /home/jovyan/work
+            name: jupyter-data  
+      volumes:
+      - name: jupyter-data
+        hostPath:
+          path: /home/ubuntu
+          # TODO pass path to values
+
