@@ -1,0 +1,16 @@
+cloud:
+    id: ost
+    type: OpenStack
+    host: https://horizon.cloud.cnaf.infn.it:5000/v3
+    username: iam-demo 
+    password: token_template 
+    tenant: oidc 
+    auth_version: 3.x_oidc_access_token
+    service_region: regionOne
+    auth_url: "https://horizon.cloud.cnaf.infn.it:5000" 
+im:
+    id: im
+    type: InfrastructureManager
+    host: https://im-demo.cloud.cnaf.infn.it/infrastructures
+    token: token_template 
+
