@@ -27,10 +27,10 @@ Markdown version of this presentation can be found [here](https://github.com/DOD
 # Overview
 
 - Objective recap
-    - Deploy your own Spark cluster with Dodas
-    - How to template applications with Helm
+    1. Deploy your own Spark cluster with Dodas
+    2. How to template applications with Helm
         - Simple function example
-    - Get to know user interfaces for Spark on Dodas
+    3. Get to know user interfaces for Spark on Dodas
         - Experimenting base features
         - Debugging
 
@@ -45,6 +45,8 @@ Markdown version of this presentation can be found [here](https://github.com/DOD
 # Spark on DODAS
 
 <img src="img/k8s_spark_cut.png" width=800>
+
+You see here Helm as a tool for templating applications on K8s. We will take a look at this later after we start the deployment (sorry time reason)
 
 ---
 
@@ -63,6 +65,10 @@ Markdown version of this presentation can be found [here](https://github.com/DOD
     - __2 executor pods__
 
 Directly from the notebook is also possible to stop the current spark context and to reload a new one with different executors.
+
+---
+
+# Question time 1.
 
 ---
 
@@ -152,19 +158,9 @@ You can find a quick start guide and reference guide [here](https://cloud-pg.git
     !bash
     less templates/spark_template.yml
 
-## Understand the configuration 
+---
 
-### Defining the TOSCA type resources
-
-    !yaml
-    tosca_definitions_version: tosca_simple_yaml_1_0
-
-    imports:
-        - indigo_custom_types: https://raw.githubusercontent.com/indigo-dc/tosca-types/k8s-course/custom_types.yaml 
-
-### Time for discussion and detailed walk through
-
-Now let's take a look at the rest our template.
+# Question time 2.
 
 ---
 
@@ -198,11 +194,21 @@ Checking the status of configuration on master node:
 
 ---
 
+# Time for Helm... in a nutshell
+
+---
+
 # Helm: introduction exercise
 
-While the deployment goes, let's setup a local playgroud to understand how the K8s templating works with HELM
+While the deployment goes, let's setup a local playgroud to understand how the K8s templating works with HELM.
 
-## What's Helm
+1. Knowing the tool
+2. How you can develop and test a chart
+3. A look at Dodas spark chart 
+
+---
+
+## What's Helm 1/2
 
 [Helm](https://helm.sh/) helps managing Kubernetes applications through a standard templating.
 The latest version of Helm is maintained by the CNCF - in collaboration with Microsoft, Google, Bitnami and the Helm contributor community. For this hands on we will use the v2 though, since DODAS is currently in the middle of the migration from v2 to v3. 
@@ -211,6 +217,8 @@ The latest version of Helm is maintained by the CNCF - in collaboration with Mic
 
 ---
 
+## What's Helm 2/2
+
 On [HelmHub](https://hub.helm.sh/) you can find by yourselves the motivation of adopting a widely adopted template format.
 
 Helm uses a packaging format called charts. A chart is a collection of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
@@ -218,7 +226,7 @@ Helm uses a packaging format called charts. A chart is a collection of files tha
 ---
 # Install Helm and local k8s
 
-Let's setup our local cluster with 2 fake nodes:
+Let's setup our local cluster with 2 fake nodes that will be our __dev environment__:
 
     !bash
     # Install k8s cli
@@ -369,6 +377,10 @@ Charts can then be exposed for external reuse creating repositories with various
 
 ---
 
+# Question time 3.
+
+---
+
 # Spark HELM chart
 
 ## A look at need values 
@@ -398,6 +410,10 @@ Charts can then be exposed for external reuse creating repositories with various
         NodePort: 30888
 
 Find the whole chart tree in `templates/helm/spark`
+
+---
+
+# Question time 4.
 
 ---
 # Time to play with DODAS Spark cluster
@@ -444,7 +460,9 @@ You are also able to log into the master retrieving access information with the 
 
 Just save the prompted private key and login with `cloudadm` user
 
-## Time for discussion and a bit of playground
+---
+
+# Question time 5. and a bit of playground
 
 --- 
 
@@ -464,7 +482,7 @@ The number and size of executors can be tuned both at TOSCA level and directly f
 
 ---
 
-# Time for Spark playground and questions
+# Question time 6 and the last one :) 
 
 ---
 
