@@ -72,7 +72,7 @@ Directly from the notebook is also possible to stop the current spark context an
 
 ---
 
-# Setting up your environment
+# Let's start our deployment
 
 ## Download the Hands-on repo
 
@@ -339,7 +339,7 @@ In `values.yaml` we can now put our deployment variables:
 
     !yaml
     servicePort: 30080
-    appName: 
+    appName: myApp
 
 ---
 
@@ -462,7 +462,7 @@ Just save the prompted private key and login with `cloudadm` user
 
 ---
 
-# Question time 5. and a bit of playground
+# Question time 5.
 
 --- 
 
@@ -492,3 +492,13 @@ Just retrieve the token again and then do:
 
     !bash
     ./dodas destroy  c8a7a544-1bee-11ea-a67e-0242ac160003 
+
+---
+
+# Finally, what about lego composition?
+
+Let's take a look at how you can leverage the DODAS stack and compose different application.
+
+In `templates/spark_minio_template.yaml` you can find an example where the setup you just made with an S3 object storage using MINIO.
+
+The chart relative to Minio installation is [here](https://github.com/helm/charts/tree/master/stable/minio)

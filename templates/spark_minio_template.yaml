@@ -1,0 +1,154 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+imports:
+  - indigo_custom_types: https://raw.githubusercontent.com/indigo-dc/tosca-types/k8s-course/custom_types.yaml 
+
+description: TOSCA template for a complete CMS computing cluster on top of K8s orchestrator
+
+topology_template:
+
+  inputs:
+
+    number_of_masters:
+      type: integer
+      default: 1
+
+    num_cpus_master: 
+      type: integer
+      default: 2
+
+    mem_size_master:
+      type: string
+      default: "4 GB"
+
+    number_of_slaves:
+      type: integer
+      default: 1 
+
+    num_cpus_slave: 
+      type: integer
+      default: 2
+
+    mem_size_slave:
+      type: string
+      default: "4 GB"
+
+    server_image_slave:
+      type: string
+      default: "ost://horizon.cloud.cnaf.infn.it/3d993ab8-5d7b-4362-8fd6-af1391edca39"
+      #default: "ost://cloud.recas.ba.infn.it/1113d7e8-fc5d-43b9-8d26-61906d89d479"
+
+    server_image:
+      type: string
+      #default: "ost://cloud.recas.ba.infn.it/1113d7e8-fc5d-43b9-8d26-61906d89d479"
+      default: "ost://horizon.cloud.cnaf.infn.it/3d993ab8-5d7b-4362-8fd6-af1391edca39"
+
+    helm_values: 
+      type: string
+      default: https://gist.githubusercontent.com/dciangot/58ebea45239f8fd4134d292c2267da53/raw/e7e2b2427860272f9d4e8749c4ad20f572463229/spark_demo.yaml 
+
+    helm_minio_values:
+      type: string
+      default: https://gist.githubusercontent.com/dciangot/645a3cb17f2735863603afd1a7c32a65/raw/214622d1c69379d46ba62f40d48853689e28c599/minio_demo.yaml
+
+  node_templates:
+ 
+    helm_spark:
+      type: tosca.nodes.indigo.HelmInstall 
+      properties:
+        externalIP: { get_attribute: [ k8s_master_server, public_address, 0 ] }
+        name: "spark"
+        chart: "cloudpg/spark"
+        repos:
+            - { name: cloudpg, url: "https://cloud-pg.github.io/charts/" } 
+        values_file: { get_input: helm_values }
+      requirements:
+        - host: k8s_master
+        - dependency: k8s_wn
+
+    helm_minio:
+      type: tosca.nodes.indigo.HelmInstall
+      properties:
+        externalIP: { get_attribute: [ k8s_master_server, public_address, 0 ] }
+        name: "minio"
+        chart: "stable/minio"
+        repos: []
+        values_file: { get_input: helm_minio_values }
+        minio_access_key: "admin"
+        minio_secret_key: "adminminio"
+      requirements:
+        - host: k8s_master
+        - dependency: k8s_wn
+
+    k8s_master:
+      type: tosca.nodes.indigo.LRMS.FrontEnd.Kubernetes
+      properties:
+        admin_token: testme
+        kube_version: 1.14.0
+        kube_front_end_ip: { get_attribute: [ k8s_master_server, private_address, 0 ] } 
+      requirements:
+        - host: k8s_master_server
+
+    k8s_wn:
+      type: tosca.nodes.indigo.LRMS.WorkerNode.Kubernetes 
+      properties:
+        front_end_ip: { get_attribute: [ k8s_master_server, private_address, 0 ] }
+        kube_version: 1.14.0
+        nfs_master_ip: { get_attribute: [ k8s_master_server, private_address, 0 ] }
+      requirements:
+        - host: k8s_slave_server
+
+    k8s_master_server:
+      type: tosca.nodes.indigo.Compute
+      capabilities:
+        endpoint:
+          properties:
+            network_name: PUBLIC
+            ports:
+              kube_port:
+                protocol: tcp
+                source: 6443
+              kube_dashboard_port:
+                protocol: tcp
+                source: 30443
+              web_ui:
+                protocol: tcp
+                source: 30808
+              jupyter:
+                protocol: tcp
+                source: 30888
+        scalable:
+          properties:
+            count: { get_input: number_of_masters }
+        host:
+          properties:
+            num_cpus: { get_input: num_cpus_master }
+            mem_size: { get_input: mem_size_master } 
+        os:
+          properties:
+            image: { get_input: server_image }
+
+    k8s_slave_server:
+      type: tosca.nodes.indigo.Compute
+      capabilities:
+        endpoint:
+          properties:
+            network_name: PRIVATE
+        scalable:
+          properties:
+            count: { get_input: number_of_slaves }
+        host:
+          properties:
+            num_cpus: { get_input: num_cpus_slave }
+            mem_size: { get_input: mem_size_slave } 
+        os:
+          properties:
+            image: { get_input: server_image_slave }
+
+  outputs:
+    jupyter_endpoint:
+      value: { concat: [ 'http://', get_attribute: [ k8s_master_server, public_address, 0 ], ':30888' ] }
+    spark_endpoint:
+      value: { concat: [ 'http://', get_attribute: [ k8s_master_server, public_address, 0 ], ':30808' ] }
+    helm_values:
+      value: { get_input: helm_values }
