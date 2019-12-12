@@ -175,7 +175,7 @@ You can find a quick start guide and reference guide [here](https://cloud-pg.git
 You can check for an error in your templates with `dodas validate command`
 
     !bash
-    dodas validate --template templates/spark_template.yml
+    ./dodas validate --template templates/spark_template.yml
 
 ### Launch the deployment
 
@@ -434,7 +434,7 @@ And the spark image for Kubernetes resource manager [here](https://github.com/ap
 By now you should see something like:
 
     !bash
-    $ /usr/local/bin/dodas get status vm c8a7a544-1bee-11ea-a67e-0242ac160003 0
+    $ ./dodas get status vm c8a7a544-1bee-11ea-a67e-0242ac160003 0
         ...
         ...
         TASK [cloud-pg.ansible_role_helm : Helm install chart cloudpg/spark] ***********
