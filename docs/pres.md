@@ -268,7 +268,7 @@ Check that everything is working with:
     helm create myfirstchart
 
     # Remove standard templates
-    rm -rf mychart/templates/*.*
+    rm -rf myfirstchart/templates/*
 
 ### Chart folder tree
 
