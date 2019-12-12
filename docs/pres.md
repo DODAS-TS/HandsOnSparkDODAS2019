@@ -305,16 +305,16 @@ Charts are created as files laid out in a particular directory tree, then they c
             spec:
                 containers:
                 - name: lookup-container-deployment
-                    image: dciangot/lookup 
-                    ports:
-                    - containerPort: 80
-                    env:
-                    - name: SIMPLE_SERVICE_VERSION
-                    value: "1.0"
-                    resources:
-                        limits:
-                            memory: "64Mi"
-                            cpu: "500m"
+                  image: dciangot/lookup 
+                  ports:
+                  - containerPort: 80
+                  env:
+                  - name: SIMPLE_SERVICE_VERSION
+                  value: "1.0"
+                  resources:
+                    limits:
+                        memory: "64Mi"
+                        cpu: "500m"
                 - name: probe-container
                   image: dciangot/probe
 
