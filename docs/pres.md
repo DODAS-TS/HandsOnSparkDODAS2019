@@ -494,6 +494,7 @@ The number and size of executors can be tuned both at TOSCA level and directly f
 # Question time 6 and the last one :) 
 
 [How do I learn K8s and all these other stuff?](https://twitter.com/danielepolencic/status/1158737805557686277?s=19)
+
 ---
 
 # Destroy the cluster
