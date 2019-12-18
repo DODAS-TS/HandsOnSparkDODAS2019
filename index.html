@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Hand-on session</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="theme/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="theme/js/slides.js"></script>
+    
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-1">
+          <div class="inner">
+            
+            <header><h1>Hand-on session</h1></header>
+            
+            
+            <section><h1>DODAS generated Spark cluster</h1>
+<h3>Contact: diego.ciangottini&lt;at>pg.infn.it</h3>
+<p>Markdown version of this presentation can be found <a href="https://github.com/DODAS-TS/HandsOnSparkDODAS2019/blob/master/docs/pres.md">here</a></p>
+<h1>Big Data Analytics</h1>
+<h2>9-12 Dic. 2019, Bologna</h2></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-2">
+          <div class="inner">
+            
+            <header><h1>Presentation keyboard shortcut</h1></header>
+            
+            
+            <section><ul>
+<li>Press <code>h</code> to toggle display of help</li>
+<li>Press <code>left arrow</code> and <code>right arrow</code> to navigate</li>
+<li>Press <code>t</code> to toggle a table of contents for your presentation. Slide titles are links</li>
+<li>Press <code>ESC</code> to display the presentation overview (Exposé)</li>
+<li>Press <code>n</code> to toggle slide number visibility</li>
+<li>Press <code>e</code> to make slides filling the whole available space within the document body</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-3">
+          <div class="inner">
+            
+            <header><h1>Overview</h1></header>
+            
+            
+            <section><ul>
+<li>Objective recap<ol>
+<li>Deploy your own Spark cluster with Dodas</li>
+<li>How to template applications with Helm<ul>
+<li>Simple function example</li>
+</ul>
+</li>
+<li>Get to know user interfaces for Spark on Dodas<ul>
+<li>Experimenting base features</li>
+<li>Debugging</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-4">
+          <div class="inner">
+            
+            <header><h1>K8s on DODAS</h1></header>
+            
+            
+            <section><p><img src="img/k8s-dodas.png" width=500></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-5">
+          <div class="inner">
+            
+            <header><h1>Spark on DODAS</h1></header>
+            
+            
+            <section><h2>Client mode with Jupyter notebook</h2>
+<p><img src="img/k8s_spark_cut.png" width=800></p>
+<p>You see here Helm as a tool for templating applications on K8s. We will take a look at this later after we start the deployment (sorry time reason)</p>
+<p>At the end we wiil also see an example of job submission in <strong>cluster mode</strong></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-6">
+          <div class="inner">
+            
+            <header><h1>Setup architecture: recap</h1></header>
+            
+            
+            <section><ul>
+<li>
+<p><strong>1 Master pod</strong>:</p>
+<ul>
+<li><strong>Spark driver</strong></li>
+<li><strong>Jupyter</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Services</strong>:</p>
+<ul>
+<li><strong>Jupyter</strong></li>
+<li><strong>Spark webUI</strong></li>
+<li><strong>K8s dashboard</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>At notebook python Kernel start</strong>:</p>
+<ul>
+<li><strong>2 executor pods</strong></li>
+</ul>
+</li>
+</ul>
+<p>Directly from the notebook is also possible to stop the current spark context and to reload a new one with different executors.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-7">
+          <div class="inner">
+            
+            <header><h1>Question time 1.</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-8">
+          <div class="inner">
+            
+            <header><h1>Let's start our deployment</h1></header>
+            
+            
+            <section><h2>Download the Hands-on repo</h2>
+<div class="highlight"><pre><span></span>git clone https://github.com/DODAS-TS/HandsOnSparkDODAS2019.git
+<span class="nb">cd</span> HandsOnSparkDODAS2019
+</pre></div>
+
+<h2>Copy your DODAS configuration template</h2>
+<div class="highlight"><pre><span></span>cp templates/dodas_template.yaml ~/.dodas_template.yaml
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-9">
+          <div class="inner">
+            
+            <header><h1>Quick look at DODAS client configuration</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">cloud</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ost</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">OpenStack</span>
+    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://horizon.cloud.cnaf.infn.it:5000/v3</span>
+    <span class="l l-Scalar l-Scalar-Plain">username</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">iam-demo</span> 
+    <span class="l l-Scalar l-Scalar-Plain">password</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">token_template</span> 
+    <span class="l l-Scalar l-Scalar-Plain">tenant</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">oidc</span> 
+    <span class="l l-Scalar l-Scalar-Plain">auth_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3.x_oidc_access_token</span>
+    <span class="l l-Scalar l-Scalar-Plain">service_region</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">regionOne</span>
+    <span class="l l-Scalar l-Scalar-Plain">auth_url</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://horizon.cloud.cnaf.infn.it:5000&quot;</span> 
+<span class="l l-Scalar l-Scalar-Plain">im</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">im</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">InfrastructureManager</span>
+    <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://im-demo.cloud.cnaf.infn.it/infrastructures</span>
+    <span class="l l-Scalar l-Scalar-Plain">token</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">token_template</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-10">
+          <div class="inner">
+            
+            <header><h2>Retrieve you access token from IAM</h2></header>
+            
+            
+            <section><h3>Import the pre-configured client for the demo</h3>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">IAM_DEVICE_CODE_CLIENT_ID</span><span class="o">=</span>7b50c794-c45a-45ad-906f-83cb18e36a5d
+
+<span class="nb">export</span> <span class="nv">IAM_DEVICE_CODE_CLIENT_SECRET</span><span class="o">=</span>AJTXpc_Mo4ZgtcO7cT5CYYFHEQbeaV5IVYTiU4YQFoHyDMYZWiDPqvgmWLSV6ryBfF-HVbzLujPpgemifvVWcTY
+</pre></div>
+
+<h3>Retrieve the token</h3>
+<p>Simply run and follow the instructions:</p>
+<div class="highlight"><pre><span></span>./scripts/get_token.sh
+</pre></div>
+
+<h3>Check $HOME/.dodas.yaml file correctly filled</h3>
+<div class="highlight"><pre><span></span>cat ~/.dodas.yaml
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-11">
+          <div class="inner">
+            
+            <header><h1>Install DODAS client</h1></header>
+            
+            
+            <section><h2>Documentation</h2>
+<p>You can find a quick start guide and reference guide <a href="https://cloud-pg.github.io/dodas-go-client/">here</a></p>
+<h2>Download the binary</h2>
+<div class="highlight"><pre><span></span>wget https://github.com/Cloud-PG/dodas-go-client/releases/download/v0.3.0/dodas.zip
+unzip dodas.zip
+</pre></div>
+
+<h2>Test the installation</h2>
+<div class="highlight"><pre><span></span>./dodas --version
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-12">
+          <div class="inner">
+            
+            <header><h1>Deploy your cluster</h1></header>
+            
+            
+            <section><h2>Get TOSCA template</h2>
+<div class="highlight"><pre><span></span>less templates/spark_template.yml
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-13">
+          <div class="inner">
+            
+            <header><h1>Question time 2.</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-14">
+          <div class="inner">
+            
+            <header><h2>Deploy the cluster</h2></header>
+            
+            
+            <section><h3>Validation</h3>
+<p>You can check for an error in your templates with <code>dodas validate command</code></p>
+<div class="highlight"><pre><span></span>./dodas validate --template templates/spark_template.yml
+</pre></div>
+
+<h3>Launch the deployment</h3>
+<div class="highlight"><pre><span></span>$ ./dodas create templates/spark_template.yml 
+    Using config file: /home/centos/.dodas.yaml
+    validate called
+    Template OK
+    Template: templates/spark_template.yml 
+    Submitting request to  :  https://im-demo.cloud.cnaf.infn.it/infrastructures
+    InfrastructureID:  c8a7a544-1bee-11ea-a67e-0242ac160003
+</pre></div>
+
+<h3>Check the status of the vm configuration</h3>
+<p>Checking the status of configuration on master node:</p>
+<div class="highlight"><pre><span></span>$ ./dodas get status vm c8a7a544-1bee-11ea-a67e-0242ac160003 <span class="m">0</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-15">
+          <div class="inner">
+            
+            <header><h1>Time for Helm... in a nutshell</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-16">
+          <div class="inner">
+            
+            <header><h1>Helm: introduction exercise</h1></header>
+            
+            
+            <section><p>While the deployment goes, let's setup a local playgroud to understand how the K8s templating works with HELM.</p>
+<ol>
+<li>Knowing the tool</li>
+<li>How you can develop and test a chart</li>
+<li>A look at Dodas spark chart </li>
+</ol></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-17">
+          <div class="inner">
+            
+            <header><h2>What's Helm 1/2</h2></header>
+            
+            
+            <section><p><a href="https://helm.sh/">Helm</a> helps managing Kubernetes applications through a standard templating.
+The latest version of Helm is maintained by the CNCF - in collaboration with Microsoft, Google, Bitnami and the Helm contributor community. For this hands on we will use the v2 though, since DODAS is currently in the middle of the migration from v2 to v3. </p>
+<p><img alt="Helm motivation" src="img/helm_love.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-18">
+          <div class="inner">
+            
+            <header><h2>What's Helm 2/2</h2></header>
+            
+            
+            <section><p>On <a href="https://hub.helm.sh/">HelmHub</a> you can find by yourselves the motivation of adopting a widely adopted template format.</p>
+<p>Helm uses a packaging format called charts. A chart is a collection of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-19">
+          <div class="inner">
+            
+            <header><h1>Install Helm and local k8s</h1></header>
+            
+            
+            <section><p>Let's setup our local cluster with 2 fake nodes that will be our <strong>dev environment</strong>:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Install k8s cli</span>
+curl -LO https://storage.googleapis.com/kubernetes-release/release/<span class="sb">`</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span class="sb">`</span>/bin/linux/amd64/kubectl
+chmod +x kubectl
+
+<span class="c1"># Install k8s in docker</span>
+curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.6.1/kind-<span class="k">$(</span>uname<span class="k">)</span>-amd64
+chmod +x ./kind
+
+<span class="c1"># deploy the playground</span>
+./kind create cluster --config templates/kind_cluster_config.yml
+
+<span class="c1"># install helm client</span>
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 <span class="p">|</span> bash
+</pre></div>
+
+<p>Check that everything is working with:</p>
+<div class="highlight"><pre><span></span>$ ./kubectl get node
+    NAME                 STATUS   ROLES    AGE     VERSION
+    kind-control-plane   Ready    master   3m55s   v1.16.3
+    kind-worker          Ready    &lt;none&gt;   2m36s   v1.16.3
+    kind-worker2         Ready    &lt;none&gt;   2m36s   v1.16.3
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-20">
+          <div class="inner">
+            
+            <header><h2>Simple example</h2></header>
+            
+            
+            <section><h3>Init your chart</h3>
+<div class="highlight"><pre><span></span><span class="c1"># Create a defualt chart</span>
+helm create myfirstchart
+
+<span class="c1"># Remove standard templates</span>
+rm -rf myfirstchart/templates/*
+</pre></div>
+
+<h3>Chart folder tree</h3>
+<p>Charts are created as files laid out in a particular directory tree, then they can be packaged into versioned archives to be deployed.</p>
+<div class="highlight"><pre><span></span>myfirstchart/
+    Chart.yaml          # A YAML file containing information about the chart
+    LICENSE             # OPTIONAL: A plain text file containing the license for the chart
+    README.md           # OPTIONAL: A human-readable README file
+    values.yaml         # The default configuration values for this chart
+    templates/          # A directory of templates that, when combined with values,
+                        # will generate valid Kubernetes manifest files.
+    templates/NOTES.txt # OPTIONAL: A plain text file containing short usage notes
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-21">
+          <div class="inner">
+            
+            <header><h1>Helm: "chart up" your application</h1></header>
+            
+            
+            <section><h2>Deployment template</h2>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">apiVersion</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="l l-Scalar l-Scalar-Plain">kind</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">lookup-deployment</span>
+<span class="l l-Scalar l-Scalar-Plain">spec</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">replicas</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+    <span class="l l-Scalar l-Scalar-Plain">template</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">labels</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.appName</span> <span class="p p-Indicator">}}</span>
+        <span class="l l-Scalar l-Scalar-Plain">spec</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">containers</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">lookup-container-deployment</span>
+              <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">dciangot/lookup</span> 
+              <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span>
+              <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">containerPort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+              <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span>
+              <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">SIMPLE_SERVICE_VERSION</span>
+              <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="s">&quot;1.0&quot;</span>
+              <span class="l l-Scalar l-Scalar-Plain">resources</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">limits</span><span class="p p-Indicator">:</span>
+                    <span class="l l-Scalar l-Scalar-Plain">memory</span><span class="p p-Indicator">:</span> <span class="s">&quot;64Mi&quot;</span>
+                    <span class="l l-Scalar l-Scalar-Plain">cpu</span><span class="p p-Indicator">:</span> <span class="s">&quot;500m&quot;</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">probe-container</span>
+              <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">dciangot/probe</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">selector</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">matchLabels</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.appName</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-22">
+          <div class="inner">
+            
+            <header><h2>Service template</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">apiVersion</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="l l-Scalar l-Scalar-Plain">kind</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">simpleservice</span>
+<span class="l l-Scalar l-Scalar-Plain">spec</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.servicePort</span> <span class="p p-Indicator">}}</span>
+          <span class="l l-Scalar l-Scalar-Plain">targetPort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="l l-Scalar l-Scalar-Plain">selector</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.appName</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+
+<h2>Value file</h2>
+<p>In <code>values.yaml</code> we can now put our deployment variables:</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">servicePort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">30080</span>
+<span class="l l-Scalar l-Scalar-Plain">appName</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">myApp</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-23">
+          <div class="inner">
+            
+            <header><h2>Install your Helm chart on the cluster</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span></span>$ helm install mychart ./myfirstchart
+    NAME: mychart
+    LAST DEPLOYED: Wed Dec <span class="m">11</span> <span class="m">09</span>:02:50 <span class="m">2019</span>
+    NAMESPACE: default
+    STATUS: deployed
+    REVISION: <span class="m">1</span>
+    TEST SUITE: None
+</pre></div>
+
+<p>One can also verified the manifest that has been actually submitted to k8s with:</p>
+<div class="highlight"><pre><span></span>helm get manifest mychart
+</pre></div>
+
+<p>You should see that the parameters in the templates should be filled with the values we passed on values.yaml file.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-24">
+          <div class="inner">
+            
+            <header><h2>Verify the deployments</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span></span>$ ./kubectl get pod
+    NAME                                 READY   STATUS    RESTARTS   AGE
+    lookup-deployment-64dd5568bc-6dft5   <span class="m">2</span>/2     Running   <span class="m">0</span>          49s
+</pre></div>
+
+<h2>Publish the chart</h2>
+<p>Charts can then be exposed for external reuse creating repositories with various methods described <a href="https://helm.sh/docs/howto/chart_repository_sync_example/">here</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-25">
+          <div class="inner">
+            
+            <header><h1>Question time 3.</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-26">
+          <div class="inner">
+            
+            <header><h1>Spark HELM chart</h1></header>
+            
+            
+            <section><h2>A look at need values</h2>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">Spark</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">Path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/opt/spark</span>
+
+<span class="l l-Scalar l-Scalar-Plain">externalIP</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">enabled</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="l l-Scalar l-Scalar-Plain">ip</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{{</span> <span class="nv">externalIP</span> <span class="p p-Indicator">}}</span>
+
+<span class="l l-Scalar l-Scalar-Plain">Master</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">Name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+    <span class="l l-Scalar l-Scalar-Plain">Image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cloudpg/spark-py</span>
+    <span class="l l-Scalar l-Scalar-Plain">ImageTag</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">dodas-2.4.3-bigdl</span>
+    <span class="l l-Scalar l-Scalar-Plain">Replicas</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+    <span class="l l-Scalar l-Scalar-Plain">Component</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">spark-master</span>
+    <span class="l l-Scalar l-Scalar-Plain">Cpu</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">100m</span>
+    <span class="l l-Scalar l-Scalar-Plain">Memory</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1024Mi</span>
+    <span class="l l-Scalar l-Scalar-Plain">ServicePort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7077</span>
+    <span class="l l-Scalar l-Scalar-Plain">ContainerPort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7077</span>
+    <span class="c1"># Set Master JVM memory. Default 1g</span>
+    <span class="c1"># DaemonMemory: 1g</span>
+    <span class="l l-Scalar l-Scalar-Plain">ServiceType</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
+    <span class="l l-Scalar l-Scalar-Plain">Jupyter</span><span class="p p-Indicator">:</span>
+       <span class="l l-Scalar l-Scalar-Plain">NodePort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">30888</span>
+
+<span class="l l-Scalar l-Scalar-Plain">WebUi</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">Name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">webui</span>
+    <span class="l l-Scalar l-Scalar-Plain">ServicePort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
+    <span class="l l-Scalar l-Scalar-Plain">ContainerPort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
+    <span class="l l-Scalar l-Scalar-Plain">NodePort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">30808</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-27">
+          <div class="inner">
+            
+            <header><h1>More details</h1></header>
+            
+            
+            <section><p>Find the whole chart tree in <code>templates/helm/spark</code>
+And the spark image for Kubernetes resource manager <a href="https://github.com/apache/spark/tree/master/resource-managers/kubernetes">here</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-28">
+          <div class="inner">
+            
+            <header><h1>Question time 4.</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-29">
+          <div class="inner">
+            
+            <header><h1>Time to play with DODAS Spark cluster</h1></header>
+            
+            
+            <section><h3>Retrieve again the token</h3>
+<h3>Check the status of the deployment</h3>
+<p>By now you should see something like:</p>
+<div class="highlight"><pre><span></span>$ ./dodas get status vm c8a7a544-1bee-11ea-a67e-0242ac160003 <span class="m">0</span>
+    ...
+    ...
+    TASK <span class="o">[</span>cloud-pg.ansible_role_helm : Helm install chart cloudpg/spark<span class="o">]</span> ***********
+    Wednesday <span class="m">11</span> December <span class="m">2019</span>  <span class="m">08</span>:35:44.102069 
+    changed: <span class="o">[</span><span class="m">131</span>.154.96.135_0<span class="o">]</span>
+
+    PLAY RECAP *********************************************************************
+    <span class="m">131</span>.154.96.135_0           : <span class="nv">ok</span><span class="o">=</span><span class="m">4</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">4</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>   
+    <span class="m">131</span>.154.96.135_0           : <span class="nv">ok</span><span class="o">=</span><span class="m">4</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">4</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+
+    Task helm_spark_conf_k8s_master_server finished successfully
+    Process finished
+</pre></div>
+
+<p>If not, don't worry, we got a backup solution at <code>131.154.96.222:30888</code></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-30">
+          <div class="inner">
+            
+            <header><h2>Kubernetes Web-UI</h2></header>
+            
+            
+            <section><p>The UI should be now exposed on the port 30443 of you master node e.g. <code>https://&lt;your master IP&gt;:30443</code></p>
+<h2>Spark Web-UI</h2>
+<p>The UI should be now exposed on the port 30443 of you master node e.g. <code>https://&lt;your master IP&gt;:30808</code></p>
+<h2>Log into the k8s master</h2>
+<p>You are also able to log into the master retrieving access information with the dodas client:</p>
+<div class="highlight"><pre><span></span>./dodas get vm c8a7a544-1bee-11ea-a67e-0242ac160003 <span class="m">0</span>
+</pre></div>
+
+<p>Just save the prompted private key and login with <code>cloudadm</code> user</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-31">
+          <div class="inner">
+            
+            <header><h1>Question time 5.</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-32">
+          <div class="inner">
+            
+            <header><h1>Using Jupyter</h1></header>
+            
+            
+            <section><p>Jupyter is accessible at <code>http://&lt;your master IP&gt;:30888</code> with the password <code>testme</code></p>
+<h2>Load the exercise notebook</h2>
+<p>You should be able now to import the exercise notebook in <code>templates/spark_notebook.ipynb</code> with the upload button and to start its kernel.</p>
+<h3>Check the executor pods appearing</h3>
+<p>In the k8s web ui you should see now 2 additional pods appearing as the spark shell have been started by the kernel automatically creating  a pool of executor.</p>
+<p>The number and size of executors can be tuned both at TOSCA level and directly from Jupyter as you can find the in the example playbook provided.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-33">
+          <div class="inner">
+            
+            <header><h1>Question time 6 and the last one :)</h1></header>
+            
+            
+            <section><p><a href="https://twitter.com/danielepolencic/status/1158737805557686277?s=19">How do I learn K8s and all these other stuff?</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-34">
+          <div class="inner">
+            
+            <header><h1>Destroy the cluster</h1></header>
+            
+            
+            <section><p>Just retrieve the token again and then do:</p>
+<div class="highlight"><pre><span></span>./dodas destroy  c8a7a544-1bee-11ea-a67e-0242ac160003
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: pres.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-35">
+          <div class="inner">
+            
+            <header><h1>Finally, what about lego composition?</h1></header>
+            
+            
+            <section><p>Let's take a look at how you can leverage the DODAS stack and compose different application.</p>
+<p>In <code>templates/spark_minio_template.yaml</code> you can find an example where the setup you just made with an S3 object storage using MINIO.</p>
+<p>The chart relative to Minio installation is <a href="https://github.com/helm/charts/tree/master/stable/minio">here</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="pres.md">pres.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/35
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Hand-on session</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Presentation keyboard shortcut</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">Overview</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">K8s on DODAS</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5">Spark on DODAS</a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">Setup architecture: recap</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Question time 1.</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Let's start our deployment</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">Quick look at DODAS client configuration</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-10" class="sub">
+          <th><a href="#slide10">Retrieve you access token from IAM</a></th>
+          <td><a href="#slide10">10</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Install DODAS client</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">Deploy your cluster</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Question time 2.</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-14" class="sub">
+          <th><a href="#slide14">Deploy the cluster</a></th>
+          <td><a href="#slide14">14</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Time for Helm... in a nutshell</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">Helm: introduction exercise</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-17" class="sub">
+          <th><a href="#slide17">What's Helm 1/2</a></th>
+          <td><a href="#slide17">17</a></td>
+        </tr>
+        
+        <tr id="toc-row-18" class="sub">
+          <th><a href="#slide18">What's Helm 2/2</a></th>
+          <td><a href="#slide18">18</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Install Helm and local k8s</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-20" class="sub">
+          <th><a href="#slide20">Simple example</a></th>
+          <td><a href="#slide20">20</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21">Helm: "chart up" your application</a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-22" class="sub">
+          <th><a href="#slide22">Service template</a></th>
+          <td><a href="#slide22">22</a></td>
+        </tr>
+        
+        <tr id="toc-row-23" class="sub">
+          <th><a href="#slide23">Install your Helm chart on the cluster</a></th>
+          <td><a href="#slide23">23</a></td>
+        </tr>
+        
+        <tr id="toc-row-24" class="sub">
+          <th><a href="#slide24">Verify the deployments</a></th>
+          <td><a href="#slide24">24</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-25">
+        <th><a href="#slide25">Question time 3.</a></th>
+        <td><a href="#slide25">25</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">Spark HELM chart</a></th>
+        <td><a href="#slide26">26</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-27">
+        <th><a href="#slide27">More details</a></th>
+        <td><a href="#slide27">27</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-28">
+        <th><a href="#slide28">Question time 4.</a></th>
+        <td><a href="#slide28">28</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-29">
+        <th><a href="#slide29">Time to play with DODAS Spark cluster</a></th>
+        <td><a href="#slide29">29</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-30" class="sub">
+          <th><a href="#slide30">Kubernetes Web-UI</a></th>
+          <td><a href="#slide30">30</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-31">
+        <th><a href="#slide31">Question time 5.</a></th>
+        <td><a href="#slide31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide32">Using Jupyter</a></th>
+        <td><a href="#slide32">32</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide33">Question time 6 and the last one :)</a></th>
+        <td><a href="#slide33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide34">Destroy the cluster</a></th>
+        <td><a href="#slide34">34</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide35">Finally, what about lego composition?</a></th>
+        <td><a href="#slide35">35</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
