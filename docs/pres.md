@@ -413,6 +413,12 @@ Charts can then be exposed for external reuse creating repositories with various
         Jupyter:
            NodePort: 30888
 
+    WebUi:
+    Name: webui
+    ServicePort: 8080
+    ContainerPort: 8080
+    NodePort: 30808
+
 ---
 
 # More details
