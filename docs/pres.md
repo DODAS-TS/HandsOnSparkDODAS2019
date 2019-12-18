@@ -410,8 +410,8 @@ Charts can then be exposed for external reuse creating repositories with various
         # Set Master JVM memory. Default 1g
         # DaemonMemory: 1g
         ServiceType: ClusterIP
-    Jupyter:
-        NodePort: 30888
+        Jupyter:
+           NodePort: 30888
 
 ---
 
